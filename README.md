@@ -37,7 +37,7 @@ SGEMM performance : 8578.78 GFLOPS
 ## FP32 및 BF16 측정 코드 
 인텔에서 제공하는 oneMKL를 사용하는 GEMM 성능을 측정하는 코드는 Square Matrix를 계산하며 행렬의 크기, 연산에 사용되는 데이터 타입을 변경 할 수 있습니다.
 소스 코드에서 FLOAT를 정의하는 부분을 주석처리하고, float 또는 bfloat16에 따라 FLOAT의 타입을 정의합니다.
-FP32로 사용할 경우 float로 정의, BF16을 사용할 경우 oneapi~를 정의합니다. 행렬의 크기는 MSIZE에 값을 입력하며, 이후 make clean, make -j 112를 수행합니다.
+FP32로 사용할 경우 float로 정의, BF16을 사용할 경우 oneapi~를 정의합니다. 행렬의 크기는 MSIZE에 값을 입력하며, 이후 ```make clean, make -j 112```를 수행합니다.
 ```
 /*
 #ifndef USE_DOUBLE
