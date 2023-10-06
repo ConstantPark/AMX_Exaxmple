@@ -9,19 +9,16 @@ GEMM의 동작을 확인하여 컴퓨팅 성능을 확인하였고, MLPerf는 Tr
 GEMM Test는 다음의 코드를 사용하여 성능 평가 가능하며, AMX를 사용하기 위해서는 코드의 일부 수정이 필요합니다. 
 먼저 GEMM Test를 위해서는 인텔 컴파일러와 oneMKL 설치가 반드시 사전에 수행되어야 합니다.  
 ```
-컴파일러/MKL 링크 (https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit.html#gs.6lqnvh)  
+컴파일러/MKL (https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit.html#gs.6lqnvh)  
 소스코드 링크 (https://github.com/oneapi-src/oneAPI-samples/tree/master/Libraries/oneMKL/matrix_mul_mkl)  
 ```
+인텔 컴파일러는 설치이후 별도의 설정 작업이 필요합니다. 이를 위해서 다음의 코드를 bashrc에 적용하면 편하게 사용 가능합니다.
+```
+# oneAPI Install
+source /opt/intel/oneapi/setvars.sh --force
+source /opt/intel/oneapi/mkl/2023.2.0/env/vars.sh
+```
+
 설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
-	1. 간결하다.
-	2. 별도의 도구없이 작성가능하다.
-	3. 다양한 형태로 변환이 가능하다.
-	4. 텍스트(Text)로 저장되기 때문에 용량이 적어 보관이 용이하다.
-	5. 텍스트파일이기 때문에 버전관리시스템을 이용하여 변경이력을 관리할 수 있다.
-	6. 지원하는 프로그램과 플랫폼이 다양하다.
-MLPerf Inference Benchmark v3.1 Setting
-Intel oneMKL 및 MLPerf Inference Benchmark v3.1 Setting Guideasdasd
 
 
-
-s
