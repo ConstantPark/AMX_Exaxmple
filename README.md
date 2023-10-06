@@ -21,12 +21,12 @@ source /opt/intel/oneapi/setvars.sh --force
 source /opt/intel/oneapi/mkl/2023.2.0/env/vars.sh
 ```
 
-설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl)에서 컴파일 (make)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
+설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl.cpp)에서 컴파일 (make)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
 ```
 # 2소켓 CPU 기준으로 코어가 112이기 때문에 그에 해당되는 스레드를 생성하여 컴파일을 수행합니다.
 make -j 112 
 ```
-컴파일의 결과를 수행하면 FLOPS 정보를 얻는 것이 가능합니다.
+컴파일의 결과를 수행하면 FLOPS 정보를 얻는 것이 가능하며, 이때 Device에 출련된 내용을 확인하여야 합니다 (ES 샘플 제품이라 0000로 출력됨). 
 ```
 Problem size:  A (8000x8000) * B (8000x8000)  -->  C (8000x8000)
 Benchmark interations: 100
@@ -34,5 +34,19 @@ Device: Genuine Intel(R) 0000
 Launching oneMKL GEMM calculation...
 SGEMM performance : 8578.78 GFLOPS
 ```
-
-
+## FP32 및 BF16 측정 코드 
+인텔에서 제공하는 oneMKL를 사용하는 GEMM 성능을 측정하는 코드는 Square Matrix를 계산하며 행렬의 크기, 연산에 사용되는 데이터 타입을 변경 할 수 있습니다.
+소스 코드에서 FLOAT를 정의하는 부분을 주석처리하고, float 또는 bfloat16에 따라 FLOAT의 타입을 정의합니다.
+FP32로 사용할 경우 float로 정의, BF16을 사용할 경우 oneapi~를 정의합니다. 행렬의 크기는 MSIZE에 값을 입력하며, 이후 make clean, make -j 112를 수행합니다.
+```
+/*
+#ifndef USE_DOUBLE
+#define FLOAT   float
+#else
+#define FLOAT   double
+#endif
+*/
+#define FLOAT float // FP32
+#define FLOAT  oneapi::mkl::bfloat16 // BF
+#define MSIZE  8000 // ORG is 8192
+```
