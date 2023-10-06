@@ -13,7 +13,12 @@ GEMM Test는 다음의 코드를 사용하여 성능 평가 가능하며, AMX를
 소스코드 링크 (https://github.com/oneapi-src/oneAPI-samples/tree/master/Libraries/oneMKL/matrix_mul_mkl)  
 ```
 설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
-
+	1. 간결하다.
+	2. 별도의 도구없이 작성가능하다.
+	3. 다양한 형태로 변환이 가능하다.
+	4. 텍스트(Text)로 저장되기 때문에 용량이 적어 보관이 용이하다.
+	5. 텍스트파일이기 때문에 버전관리시스템을 이용하여 변경이력을 관리할 수 있다.
+	6. 지원하는 프로그램과 플랫폼이 다양하다.
 MLPerf Inference Benchmark v3.1 Setting
 Intel oneMKL 및 MLPerf Inference Benchmark v3.1 Setting Guideasdasd
 
