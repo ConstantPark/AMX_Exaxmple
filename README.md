@@ -14,18 +14,25 @@ GEMM Benchmark를 사용하기 위해서는 먼저 oneMKL의 사용이 가능한
 컴파일러/MKL: https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit.html#gs.6lqnvh   
 GEMM 코드: https://github.com/oneapi-src/oneAPI-samples/tree/master/Libraries/oneMKL/matrix_mul_mkl   
 ```
-## 인텔 컴파일러 및 GEMM 코드 다운로드
+## Bash shell에 적용하는 코드
 ```
 # oneAPI Install
 source /opt/intel/oneapi/setvars.sh --force
 source /opt/intel/oneapi/mkl/2023.2.0/env/vars.sh
 ```
 
-인텔 컴파일러는 설치이후 별도의 설정 작업이 필요합니다. 이를 위해서 다음의 코드를 bashrc에 적용하면 편하게 사용 가능합니다.
-GEMM Test는 다음의 코드를 사용하여 성능 평가 가능하며, AMX를 사용하기 위해서는 코드의 일부 수정이 필요합니다. 
-먼저 GEMM Test를 위해서는 인텔 컴파일러와 oneMKL 설치가 반드시 사전에 수행되어야 합니다.  
-
-
-설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
+설치가 완료된 이후 소스코드 위치 (matrix_mul_mkl)에서 컴파일 (make)을 수행하면 컴파일 결과로 sgemm, dgemm binary를 얻을 수 있습니다.
+```
+# 2소켓 CPU 기준으로 코어가 112이기 때문에 그에 해당되는 스레드를 생성하여 컴파일을 수행합니다.
+make -j 112 
+```
+컴파일의 결과를 수행하면 FLOPS 정보를 얻는 것이 가능합니다.
+```
+Problem size:  A (8000x8000) * B (8000x8000)  -->  C (8000x8000)
+Benchmark interations: 100
+Device: Genuine Intel(R) 0000
+Launching oneMKL GEMM calculation...
+SGEMM performance : 8578.78 GFLOPS
+```
 
 
