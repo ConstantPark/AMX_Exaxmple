@@ -59,7 +59,7 @@ NVIDIA, Intel 등 HW 벤더들이 각 하드웨어에서 성능 테스를 진행
 이러한 MLPerf Benchmark를 사용하기 위해서는 코드 다운로드와 MLPerf와 관련된 추가적인 설치가 사전에 필요합니다.
 사용을 위해서는, MLPef의 LoadGen을 먼저 설치해야 하며 이것은  
 
-![](https://raw.githubusercontent.com/mlcommons/inference/master/loadgen/loadgen_integration_diagram.svg){: width="30%" height="30%"}
+![](https://raw.githubusercontent.com/mlcommons/inference/master/loadgen/loadgen_integration_diagram.svg){: width="30%" height="30%"}  
 
 ## MLPerf Inference v.31 Benchmark
 ```
