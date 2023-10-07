@@ -73,7 +73,7 @@ MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://githu
 설치 순서는 LoadGen, MLPerf Inference benchmark 순으로 수행 되어야 합니다.
 LoadGen의 설치는 위의 링크를 참조하여 진행가능하며, 세팅 과정에서 native 환경에서 설정을 진행하였습니다.
 MLPerf는 inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu 폴더에 GPT-J의 성능 평가를 수행할 수 있는 코드가 있습니다.
-해당 코드는 Docker build 또는 Bare-metal로 설치와 사용이 가능하지만, 직접 설치 했을때는 둘다 문제가 발생하였습니다.
+해당 코드는 Docker build 또는 Bare Metal로 설치와 사용이 가능하지만, 직접 설치 했을때는 둘다 문제가 발생하였습니다.
 발생된 문제의 Log는 다음과 같으며 원인은 현재 파악중에 있습니다설명드신 순서에 맞춰서 진행을 부탁드립니다.
 
 ## Docker Build 설치시 발생하는 Log
@@ -90,17 +90,31 @@ Dockerfile_int4:43
 MLPerf에 올라간 결과는 앞서 말씀드린 것처럼 BF16/Int8로 추론의 결과입니다. 하지만 도커 파일은 현재 Int8/Int4가 올라와 있는 상태입니다. 
 보통 MLPerf에 올린 결과만 보기 때문에, 코드 관리가 잘 되는 편은 아닌것으로 생각되며, Int8/Int4 모두 설치 과정에서 문제가 발생하는 것을 확인하였습니다.
 문제의 원인은 Docker Makefile 내의 torch가 현재 없는 버전이라 그렇습니다. 다른 유사 버전으로 변경하면 다른 문제가 발생하는 것을 확인하였습니다.
-따라서, Docker 보다는 Bare-metal로 설치하는 것이 현재 가능한 방법이라는 생각이 들었습니다.
+따라서, Docker 보다는 Bare Metal로 설치하는 것이 현재 가능한 방법이라는 생각이 들었습니다.
 
-## Docker Build 설치시 발생하는 Log
+## Bare Metal 설치시 발생하는 Log
 ```
-1113.4 ERROR: No matching distribution found for torch==2.1.0.dev20230711+cpu
-------
-Dockerfile_int4:43
---------------------
-  42 |     ARG PYTHON_VERSION=3.9
-  43 | >>> RUN curl -fsSL -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
-  44 | >>>     chmod +x ~/miniconda.sh && \
-  45 | >>>     ~/miniconda.sh -b -p /opt/conda && \
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libtcmalloc.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libiomp5.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libtcmalloc.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libiomp5.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libtcmalloc.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+Traceback (most recent call last):
+  File "/home/smrc/inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu/runner.py", line 6, in <module>
+    from SUT import SUT
+  File "/home/smrc/inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu/SUT.py", line 14, in <module>
+    import thread_binder
+ModuleNotFoundError: No module named 'thread_binder'
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libiomp5.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/home/smrc/miniconda3/lib/libtcmalloc.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+cp: cannot stat './offline-output-DSOL-CRB-Test-01-batch-14-procs-4-ins-per-proc-2-10-05-03-04/*': No such file or directory
 ```
-MLPer
+Bare Metal을 사용한 설치 방법도 Docker와 마찬가지로 Int8/Int4만 공개되었습니다. 내부 코드에 BF16을 지원하는 코드가 있으나 설명은 없습니다.
+BF16, Int4/Int8 모두 설치과정에서 오류가 발생하였으며, 해당 오류가 ES 샘플 제품으로 인한 것인지 아니면 다른 것인지 현재 확인 중입니다.
+앞서 설명드린 LoadGen의 SUT라는 Package에서 현재 오류가 발생하며, thread_bind라는 라이브러리를 찾지 못하고 있습니다.
+해당 패키지는 구글링, MLerf Github를 찾았을때 없는 이슈이며, OpenMP5 라이브러리를 사용하는 과정에서 문제가 발생한 것으로 추측하고 있습니다. 
+문제 해결을 위해서 OpenMP5 라이브러리를 따로 설치하고 다시 설치를 하였으나 동일한 문제가 계속 발생하고 있습니다. 
+
+
+Docker, Bare Metal을 사용한 방법 모두 해보고, 결과 알려주시면 감사하겠습니다.
+
