@@ -66,7 +66,7 @@ MLPerf Benchmark를 사용하기 위해서는 코드 다운로드와 MLPerf와 �
 MLPerf 설명자료: http://www.kibme.org/resources/journal/20200206100621546.pdf
 성능 Board: https://mlcommons.org/en/inference-datacenter-31/
 MLPerf (LoadGen) 설치: https://github.com/mlcommons/inference/blob/master/loadgen/README_BUILD.md
-MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://github.com/mlcommons/inference_results_v3.1
+MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1
 ```
 
 ## Install 방법 with Bare Metal and Docker build
