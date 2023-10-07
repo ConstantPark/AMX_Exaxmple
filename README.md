@@ -61,9 +61,16 @@ MLPerf Benchmark를 사용하기 위해서는 코드 다운로드와 MLPerf와 �
 
 <img src = "loadgen_integration_diagram.svg" width = "80%" height = "80%">  
 
-## MLPerf Inference v.31 Benchmark
+## MLPerf Inference v.31 Benchmark Link
 ```
+MLPerf 설명자료: http://www.kibme.org/resources/journal/20200206100621546.pdf
 성능 Board: https://mlcommons.org/en/inference-datacenter-31/
-MLPerf (LoadGen) 설치: https://github.com/mlcommons/inference/tree/master/loadgen
+MLPerf (LoadGen) 설치: https://github.com/mlcommons/inference/blob/master/loadgen/README_BUILD.md
 MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://github.com/mlcommons/inference_results_v3.1
 ```
+
+## Install 방법
+LoadGen의 설치는 위의 링크를 참조하여 진행가능하며, 세팅 과정에서 native 환경에서 설정을 진행하였습니다.  
+MLPerf는 inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu 폴더에 GPT-J의 성능 평가를 수행할 수 있는 코드가 있습니다.  
+해당 코드는 Docker build 또는 Bare-metal로 사용가능하지만, 현재 제공된 코드는 docker build에 문제가 있습니다.  
+
