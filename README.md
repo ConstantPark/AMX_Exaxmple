@@ -110,7 +110,7 @@ ERROR: ld.so: object '/home/smrc/miniconda3/lib/libtcmalloc.so' from LD_PRELOAD 
 cp: cannot stat './offline-output-DSOL-CRB-Test-01-batch-14-procs-4-ins-per-proc-2-10-05-03-04/*': No such file or directory
 ```
 Bare Metal을 사용한 설치 방법도 Docker와 마찬가지로 Int8/Int4만 공개되었습니다. 내부 코드에 BF16을 지원하는 코드가 있으나 설명은 없습니다.
-BF16, Int4/Int8 모두 설치과정에서 오류가 발생하였으며, 해당 오류가 ES 샘플 제품으로 인한 것인지 아니면 다른 것인지 현재 확인 중입니다.
+BF16, Int4/Int8 모두 설치과정에서 오류가 발생하였으며, 해당 오류의 원인을 현재 확인 중입니다.
 앞서 설명드린 LoadGen의 SUT라는 Package에서 현재 오류가 발생하며, thread_bind라는 라이브러리를 찾지 못하고 있습니다.
 해당 패키지는 구글링, MLerf Github를 찾았을때 없는 이슈이며, OpenMP5 라이브러리를 사용하는 과정에서 문제가 발생한 것으로 추측하고 있습니다. 
 문제 해결을 위해서 OpenMP5 라이브러리를 따로 설치하고 다시 설치를 하였으나 동일한 문제가 계속 발생하고 있습니다. 
