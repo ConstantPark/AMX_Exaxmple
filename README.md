@@ -57,9 +57,12 @@ FP32로 사용할 경우 float로 정의, BF16을 사용할 경우 oneapi~를 �
 MLperf는 딥러닝의 Inference/Training을 평가하는 Benchmark로 최근 공개된 v3.1 버전은 LLM (GPT-J)에 관한 성능 측정 기능이 추가되었습니다. 
 NVIDIA, Intel 등 HW 벤더들이 각 하드웨어에서 성능 테스를 진행하고, 그때 사용된 코드와 성능 결과를 올려 공개하고 있습니다.
 이러한 MLPerf Benchmark를 사용하기 위해서는 코드 다운로드와 MLPerf와 관련된 추가적인 설치가 사전에 필요합니다.
+사용을 위해서는, MLPef의 LoadGen을 먼저 설치해야 하며 이것은  
+![LYNMP 로고](https://raw.githubusercontent.com/mlcommons/inference/master/loadgen/loadgen_integration_diagram.svg "LYMNP 로고")
 
 ## MLPerf Inference v.31 Benchmark
 ```
-성능 Board: https://mlcommons.org/en/inference-datacenter-31/ 
+성능 Board: https://mlcommons.org/en/inference-datacenter-31/
+MLPerf (LoadGen) 설치: https://github.com/mlcommons/inference/tree/master/loadgen
 MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://github.com/mlcommons/inference_results_v3.1
 ```
