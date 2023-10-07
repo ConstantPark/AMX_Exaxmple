@@ -56,6 +56,7 @@ FP32로 사용할 경우 float로 정의, BF16을 사용할 경우 oneapi~를 �
 # MLPerf Inference v3.1 Benchmark
 MLperf는 딥러닝의 Inference/Training을 평가하는 Benchmark로 최근 공개된 v3.1 버전은 LLM (GPT-J)에 관한 성능 측정 기능이 추가되었습니다. 
 NVIDIA, Intel 등 HW 벤더들이 각 하드웨어에서 성능 테스를 진행하고, 그때 사용된 코드와 성능 결과를 올려 공개하고 있습니다.
+올해 8월 초에 SPR (Sapphire Rapids)에서 BF16/Int8로 추론을 했을때 얻을 수 있는 성능을 공개하였습니다. 이러한 
 MLPerf Benchmark를 사용하기 위해서는 코드 다운로드와 MLPerf와 관련된 추가적인 설치가 사전에 필요합니다.
 사용을 위해서는, MLPef의 LoadGen을 먼저 설치해야 하며 이것은 특정 입력/출력 길이에 대한 Workload를 생성하는 기능에 해당됩니다.
 
@@ -69,8 +70,13 @@ MLPerf (LoadGen) 설치: https://github.com/mlcommons/inference/blob/master/load
 MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://github.com/mlcommons/inference_results_v3.1
 ```
 
-## Install 방법
-LoadGen의 설치는 위의 링크를 참조하여 진행가능하며, 세팅 과정에서 native 환경에서 설정을 진행하였습니다.  
-MLPerf는 inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu 폴더에 GPT-J의 성능 평가를 수행할 수 있는 코드가 있습니다.  
-해당 코드는 Docker build 또는 Bare-metal로 사용가능하지만, 현재 제공된 코드는 docker build에 문제가 있습니다.  
+## Install 방법 with Bare Metal and Docker build
+설치 순서는 LoadGen, MLPerf Inference benchmark 순으로 수행 되어야 합니다.
+LoadGen의 설치는 위의 링크를 참조하여 진행가능하며, 세팅 과정에서 native 환경에서 설정을 진행하였습니다.
+MLPerf는 inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu 폴더에 GPT-J의 성능 평가를 수행할 수 있는 코드가 있습니다.
+해당 코드는 Docker build 또는 Bare-metal로 설치와 사용이 가능하지만, 직접 설치 했을때는 둘다 문제가 발생하였습니다.
+발생된 문제의 Log는 다음과 같으며 원인은 현재 파악중에 있습니다 (추측으로는 EMR 사용으로 인한 것이 아닌가 합니다). 설명드신 순서에 맞춰서 진행을 부탁드립니다.
+
+현재 제공된 코드는 docker build에 문제가 있습니다.  
+
 
