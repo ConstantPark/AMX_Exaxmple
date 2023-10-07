@@ -75,8 +75,16 @@ MLPerf 코드: https://github.com/mlcommons/inference_results_v3.1)https://githu
 LoadGen의 설치는 위의 링크를 참조하여 진행가능하며, 세팅 과정에서 native 환경에서 설정을 진행하였습니다.
 MLPerf는 inference_results_v3.1/closed/Intel/code/gptj-99/pytorch-cpu 폴더에 GPT-J의 성능 평가를 수행할 수 있는 코드가 있습니다.
 해당 코드는 Docker build 또는 Bare-metal로 설치와 사용이 가능하지만, 직접 설치 했을때는 둘다 문제가 발생하였습니다.
-발생된 문제의 Log는 다음과 같으며 원인은 현재 파악중에 있습니다 (추측으로는 EMR 사용으로 인한 것이 아닌가 합니다). 설명드신 순서에 맞춰서 진행을 부탁드립니다.
+발생된 문제의 Log는 다음과 같으며 원인은 현재 파악중에 있습니다설명드신 순서에 맞춰서 진행을 부탁드립니다.
 
-현재 제공된 코드는 docker build에 문제가 있습니다.  
-
-
+## Bare Metal 설치시 발생하는 Log
+```
+1113.4 ERROR: No matching distribution found for torch==2.1.0.dev20230711+cpu
+------
+Dockerfile_int4:43
+--------------------
+  42 |     ARG PYTHON_VERSION=3.9
+  43 | >>> RUN curl -fsSL -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
+  44 | >>>     chmod +x ~/miniconda.sh && \
+  45 | >>>     ~/miniconda.sh -b -p /opt/conda && \
+```
